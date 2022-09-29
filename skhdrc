@@ -1,0 +1,104 @@
+# ############################################################### #
+#                           yabai                                 #
+# ############################################################### #
+
+:: default  : yabai -m config window_border off
+:: mode  @ : yabai -m config active_window_border_color 0xffcd5c5c; yabai -m config normal_window_border_color 0xffcd5c5c; yabai -m window --toggle border
+:: float @ : yabai -m config active_window_border_color 0xfffcc200; yabai -m config normal_window_border_color 0xfffcc200; yabai -m window --toggle border
+
+cmd + alt + ctrl - l ; mode
+mode < escape ; default
+mode < cmd + alt + ctrl - l ; default
+mode < hyper - l ; float
+
+# toggle window split type
+mode < cmd + alt + ctrl - e : yabai -m window --toggle split
+
+mode < cmd - n : yabai -m space --create
+mode < shift + cmd - n : yabai -m space --create && \
+                  index="$(yabai -m query --spaces --display | jq 'map(select(."is-native-fullscreen" == false))[-1].index')" && \
+                  yabai -m window --space "${index}" && \
+                  yabai -m space --focus "${index}"
+mode < cmd - w : yabai -m space --destroy
+mode < shift + cmd - w : yabai -m query --spaces \
+                         | jq 'reverse | .[] | select((.windows | length) == 0) | .index' \
+                         | xargs -I{} yabai -m space {} --destroy
+
+# select mode
+mode < h  : yabai -m window --focus west
+mode < j  : yabai -m window --focus south
+mode < k  : yabai -m window --focus north
+mode < l  : yabai -m window --focus east
+
+mode < n  : yabai -m space --focus next
+mode < p  : yabai -m space --focus prev
+
+# move mode
+mode < ctrl - h : yabai -m window --warp west
+mode < ctrl - j : yabai -m window --warp south
+mode < ctrl - k : yabai -m window --warp north
+mode < ctrl - l : yabai -m window --warp east
+
+mode < ctrl - n : yabai -m window --space next; yabai -m space --focus next
+mode < ctrl - p : yabai -m window --space prev; yabai -m space --focus prev
+
+mode < ctrl + shift - h  : yabai -m window --swap west
+mode < ctrl + shift - j  : yabai -m window --swap south
+mode < ctrl + shift - k  : yabai -m window --swap north
+mode < ctrl + shift - l  : yabai -m window --swap east
+
+# resize mode
+mode < alt - h : yabai -m window --resize left:-50:0  || yabai -m window --resize right:-50:0
+mode < alt - j : yabai -m window --resize bottom:0:50 || yabai -m window --resize top:0:50
+mode < alt - k : yabai -m window --resize top:0:-50   || yabai -m window --resize bottom:0:-50
+mode < alt - l : yabai -m window --resize right:50:0  || yabai -m window --resize left:50:0
+
+mode < shift + alt - h : yabai -m window --resize left:50:0
+mode < shift + alt - j : yabai -m window --resize bottom:0:-50
+mode < shift + alt - k : yabai -m window --resize top:0:50
+mode < shift + alt - l : yabai -m window --resize right:-50:0
+
+mode < cmd + alt + ctrl - 0x18 : yabai -m space --balance # =
+
+mode < cmd + alt + ctrl - f : yabai -m window --toggle zoom-fullscreen
+
+# Float mode
+hyper - l ; float
+float < cmd + alt + ctrl - l ; mode
+float < escape ; default
+
+float < space        : yabai -m window --toggle float -- toggle border --grid 4:4:1:1:2:2
+float < ctrl - space : "${HOME}"/.config/skhd/scripts/toggle_layout.sh
+
+float < cmd + alt + ctrl - 0x18 : yabai -m window --grid 4:4:1:1:2:2 # =
+
+# make floating window fill screen
+float < cmd + alt + ctrl - f : yabai -m window --grid 1:1:0:0:1:1
+
+# move floating window
+float < y : yabai -m window --grid 1:2:0:0:1:1
+float < u : yabai -m window --grid 2:1:0:1:1:1
+float < i : yabai -m window --grid 2:1:0:0:1:1
+float < o : yabai -m window --grid 1:2:1:0:1:1
+
+float < shift - y : yabai -m window --grid 2:2:0:0:1:1
+float < shift - u : yabai -m window --grid 2:2:0:1:1:1
+float < shift - i : yabai -m window --grid 2:2:1:0:1:1
+float < shift - o : yabai -m window --grid 2:2:1:1:1:1
+
+# move floating window
+float < h : yabai -m window --move rel:-20:0
+float < j : yabai -m window --move rel:0:20
+float < k : yabai -m window --move rel:0:-20
+float < l : yabai -m window --move rel:20:0
+
+# increase window size
+float < alt - h        : yabai -m window --resize left:-20:0
+float < alt - j        : yabai -m window --resize bottom:0:20
+float < alt - k        : yabai -m window --resize top:0:-20
+float < alt - l        : yabai -m window --resize right:20:0
+float < shift + alt - h: yabai -m window --resize left:20:0
+float < shift + alt - j: yabai -m window --resize bottom:0:-20
+float < shift + alt - k: yabai -m window --resize top:0:20
+float < shift + alt - l: yabai -m window --resize right:-20:0
+
