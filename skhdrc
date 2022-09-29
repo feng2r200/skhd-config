@@ -25,19 +25,19 @@ mode < shift + cmd - w : yabai -m query --spaces \
                          | xargs -I{} yabai -m space {} --destroy
 
 # select mode
-mode < h  : yabai -m window --focus west
+mode < h  : yabai -m window --focus west || yabai -m display --focus prev
 mode < j  : yabai -m window --focus south
 mode < k  : yabai -m window --focus north
-mode < l  : yabai -m window --focus east
+mode < l  : yabai -m window --focus east || yabai -m display --focus next
 
 mode < n  : yabai -m space --focus next
 mode < p  : yabai -m space --focus prev
 
 # move mode
-mode < ctrl - h : yabai -m window --warp west
+mode < ctrl - h : yabai -m window --warp west || (yabai -m window --display prev; yabai -m display --focus prev)
 mode < ctrl - j : yabai -m window --warp south
 mode < ctrl - k : yabai -m window --warp north
-mode < ctrl - l : yabai -m window --warp east
+mode < ctrl - l : yabai -m window --warp east || (yabai -m window --display next; yabai -m display --focus next)
 
 mode < ctrl - n : yabai -m window --space next; yabai -m space --focus next
 mode < ctrl - p : yabai -m window --space prev; yabai -m space --focus prev
