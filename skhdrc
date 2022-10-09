@@ -17,6 +17,7 @@ mode < cmd + alt + ctrl - s : "${HOME}"/.config/skhd/scripts/toggle-window-bsp-s
 mode < cmd + alt + ctrl - d : yabai -m window --focus stack.next || yabai -m window --focus stack.first
 mode < cmd + alt + ctrl - 0x18 : yabai -m space --balance # =
 mode < cmd + alt + ctrl - f : yabai -m window --toggle zoom-fullscreen
+mode < cmd + alt + ctrl - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
 
 mode < cmd - n         : "${HOME}"/.config/skhd/scripts/create_new_space.sh
 mode < shift + cmd - n : "${HOME}"/.config/skhd/scripts/create_new_space.sh 1
