@@ -13,16 +13,17 @@ mode < hyper - l ; float
 
 # toggle window split type
 mode < cmd + alt + ctrl - e : yabai -m window --toggle split
+mode < cmd + alt + ctrl - s : "${HOME}"/.config/skhd/scripts/toggle-window-bsp-stack.sh
+mode < cmd + alt + ctrl - d : yabai -m window --focus stack.next || yabai -m window --focus stack.first
+mode < cmd + alt + ctrl - 0x18 : yabai -m space --balance # =
+mode < cmd + alt + ctrl - f : yabai -m window --toggle zoom-fullscreen
 
-mode < cmd - n : yabai -m space --create
-mode < shift + cmd - n : yabai -m space --create && \
-                  index="$(yabai -m query --spaces --display | jq 'map(select(."is-native-fullscreen" == false))[-1].index')" && \
-                  yabai -m window --space "${index}" && \
-                  yabai -m space --focus "${index}"
-mode < cmd - w : yabai -m space --destroy
-mode < shift + cmd - w : yabai -m query --spaces \
-                         | jq 'reverse | .[] | select((.windows | length) == 0) | .index' \
-                         | xargs -I{} yabai -m space {} --destroy
+mode < cmd - n         : "${HOME}"/.config/skhd/scripts/create_new_space.sh
+mode < shift + cmd - n : "${HOME}"/.config/skhd/scripts/create_new_space.sh 1
+mode < cmd - w         : "${HOME}"/.config/skhd/scripts/destroy_space.sh
+mode < shift + cmd - w : "${HOME}"/.config/skhd/scripts/destroy_empty_space.sh
+
+mode < cmd - tab       : yabai -m space --focus recent
 
 # select mode
 mode < h  : yabai -m window --focus west || yabai -m display --focus prev
@@ -30,8 +31,11 @@ mode < j  : yabai -m window --focus south
 mode < k  : yabai -m window --focus north
 mode < l  : yabai -m window --focus east || yabai -m display --focus next
 
-mode < n  : yabai -m space --focus next
-mode < p  : yabai -m space --focus prev
+mode < n  : yabai -m display --focus next || yabai -m display --focus first
+mode < p  : yabai -m display --focus prev || yabai -m display --focus last
+
+mode < alt - n  : yabai -m space --focus next || yabai -m space --focus first
+mode < alt - p  : yabai -m space --focus prev || yabai -m space --focus last
 
 # move mode
 mode < ctrl - h : yabai -m window --warp west || (yabai -m window --display prev; yabai -m display --focus prev)
@@ -39,8 +43,8 @@ mode < ctrl - j : yabai -m window --warp south
 mode < ctrl - k : yabai -m window --warp north
 mode < ctrl - l : yabai -m window --warp east || (yabai -m window --display next; yabai -m display --focus next)
 
-mode < ctrl - n : yabai -m window --space next; yabai -m space --focus next
-mode < ctrl - p : yabai -m window --space prev; yabai -m space --focus prev
+mode < ctrl - n : (yabai -m window --space next; yabai -m space --focus next) || (yabai -m window --space first; yabai -m space --focus first)
+mode < ctrl - p : (yabai -m window --space prev; yabai -m space --focus prev) || (yabai -m window --space last; yabai -m space --focus last)
 
 mode < ctrl + shift - h  : yabai -m window --swap west
 mode < ctrl + shift - j  : yabai -m window --swap south
@@ -58,17 +62,12 @@ mode < shift + alt - j : yabai -m window --resize bottom:0:-50
 mode < shift + alt - k : yabai -m window --resize top:0:50
 mode < shift + alt - l : yabai -m window --resize right:-50:0
 
-mode < cmd + alt + ctrl - 0x18 : yabai -m space --balance # =
-
-mode < cmd + alt + ctrl - f : yabai -m window --toggle zoom-fullscreen
-
 # Float mode
 hyper - l ; float
 float < cmd + alt + ctrl - l ; mode
 float < escape ; default
 
-float < space        : yabai -m window --toggle float -- toggle border --grid 4:4:1:1:2:2
-float < ctrl - space : "${HOME}"/.config/skhd/scripts/toggle_layout.sh
+float < space        : "${HOME}"/.config/skhd/scripts/toggle-window-floating-tiling.sh
 
 float < cmd + alt + ctrl - 0x18 : yabai -m window --grid 4:4:1:1:2:2 # =
 
