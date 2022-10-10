@@ -6,6 +6,9 @@
 :: mode  @ : yabai -m config active_window_border_color 0xffcd5c5c; yabai -m config normal_window_border_color 0xffcd5c5c; yabai -m window --toggle border
 :: float @ : yabai -m config active_window_border_color 0xfffcc200; yabai -m config normal_window_border_color 0xfffcc200; yabai -m window --toggle border
 
+# Misc
+cmd + alt + ctrl - a : alacritty msg create-window
+
 cmd + alt + ctrl - l ; mode
 mode < escape ; default
 mode < cmd + alt + ctrl - l ; default
