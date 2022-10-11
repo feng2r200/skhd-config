@@ -2,13 +2,14 @@
 #                           yabai                                 #
 # ############################################################### #
 
-:: default
-:: mode @
-:: float @
+:: default : sketchybar --trigger skhd_mod VAR='0x44ffffff'
+:: mode @  : sketchybar --trigger skhd_mod VAR='0xffffc40c'
+:: float @ : sketchybar --trigger skhd_mod VAR='0xff3fe45d'
 
 # Misc
 cmd + alt + ctrl - a : /Applications/Alacritty.app/Contents/MacOS/alacritty
 
+# Mods
 cmd + alt + ctrl - l ; mode
 mode < escape ; default
 mode < cmd + alt + ctrl - l ; default
@@ -24,8 +25,8 @@ mode < cmd + alt + ctrl - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.y
 
 mode < cmd - n         : "${HOME}"/.config/skhd/scripts/create_new_space.sh
 mode < shift + cmd - n : "${HOME}"/.config/skhd/scripts/create_new_space.sh 1
-mode < cmd - w         : "${HOME}"/.config/skhd/scripts/destroy_space.sh
-mode < shift + cmd - w : "${HOME}"/.config/skhd/scripts/destroy_empty_space.sh
+mode < cmd - w         : "${HOME}"/.config/skhd/scripts/destroy_space.sh; sketchybar --update
+mode < shift + cmd - w : "${HOME}"/.config/skhd/scripts/destroy_empty_space.sh; sketchybar --update
 
 mode < cmd - tab       : yabai -m space --focus recent
 
