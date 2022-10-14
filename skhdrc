@@ -39,8 +39,8 @@ mode < l  : yabai -m window --focus east || yabai -m display --focus next
 mode < n  : yabai -m display --focus next || yabai -m display --focus first
 mode < p  : yabai -m display --focus prev || yabai -m display --focus last
 
-mode < shift + cmd - 0x1E  : yabai -m space --focus next || yabai -m space --focus first # ]
-mode < shift + cmd - 0x21  : yabai -m space --focus prev || yabai -m space --focus last # [
+mode < shift - n  : yabai -m space --focus next || yabai -m space --focus first
+mode < shift - p  : yabai -m space --focus prev || yabai -m space --focus last
 
 # move mode
 mode < ctrl - h : yabai -m window --warp west || (yabai -m window --display prev; yabai -m display --focus prev)
