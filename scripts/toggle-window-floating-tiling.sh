@@ -41,3 +41,6 @@ if [ $spaceType = '"bsp"' ]; then
     fi
   fi
 fi
+
+sketchybar --trigger window_focus
+

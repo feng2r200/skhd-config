@@ -14,6 +14,7 @@ then
   || yabai -m window west --stack $windowId \
   || yabai -m window east --stack $windowId
 else
-  echo "haha"
   yabai -m window --toggle float && yabai -m window --toggle float
 fi
+
+sketchybar --trigger window_focus

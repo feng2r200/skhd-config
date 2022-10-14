@@ -18,7 +18,7 @@ mode < hyper - l ; float
 # toggle window split type
 mode < cmd + alt + ctrl - e : yabai -m window --toggle split
 mode < cmd + alt + ctrl - s : "${HOME}"/.config/skhd/scripts/toggle-window-bsp-stack.sh
-mode < cmd + alt + ctrl - d : yabai -m window --focus stack.next || yabai -m window --focus stack.first
+mode < cmd + alt + ctrl - d : (yabai -m window --focus stack.next || yabai -m window --focus stack.first); sketchybar --trigger window_focus
 mode < cmd + alt + ctrl - 0x18 : yabai -m space --balance # =
 mode < cmd + alt + ctrl - f : yabai -m window --toggle zoom-fullscreen
 mode < cmd + alt + ctrl - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
