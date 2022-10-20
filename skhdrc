@@ -2,79 +2,85 @@
 #                           yabai                                 #
 # ############################################################### #
 
-:: default : sketchybar --trigger skhd_mod VAR='0x44ffffff'
-:: mode @  : sketchybar --trigger skhd_mod VAR='0xffffc40c'
-:: float @ : sketchybar --trigger skhd_mod VAR='0xff3fe45d'
+:: default  : sketchybar --trigger skhd_mod VAR='NORMAL'
+:: motion @ : sketchybar --trigger skhd_mod VAR='MOTION'
+:: misc @   : sketchybar --trigger skhd_mod VAR='MISC'
+:: float @  : sketchybar --trigger skhd_mod VAR='FLOAT'
 
-# Misc
+# Open
 cmd + alt + ctrl - a : /Applications/Alacritty.app/Contents/MacOS/alacritty
 
-# Mods
-cmd + alt + ctrl - l ; mode
-mode < escape ; default
-mode < cmd + alt + ctrl - l ; default
-mode < hyper - l ; float
+# Mod Change
+cmd + alt + ctrl - l                    ; motion
+cmd + alt + ctrl - 0x29                 ; misc # ;
+cmd + alt + ctrl - 0x27                 ; float # '
+
+motion, misc, float < escape            ; default
+motion  < cmd + alt + ctrl - l          ; default
+misc    < cmd + alt + ctrl - 0x29       ; default
+float   < cmd + alt + ctrl - 0x27       ; default
+
+misc, float   < cmd + alt + ctrl - l    ; motion
+motion, float < cmd + alt + ctrl - 0x29 ; misc
+motion, misc  < cmd + alt + ctrl - 0x27 ; float
+
+# Focus Change
+motion, misc < cmd - tab : yabai -m space --focus recent
+
+motion, misc < ctrl - h  : yabai -m window --focus west || yabai -m display --focus prev
+motion, misc < ctrl - j  : yabai -m window --focus south
+motion, misc < ctrl - k  : yabai -m window --focus north
+motion, misc < ctrl - l  : yabai -m window --focus east || yabai -m display --focus next
+
+motion, misc < ctrl - n  : yabai -m display --focus next || yabai -m display --focus first
+motion, misc < ctrl - p  : yabai -m display --focus prev || yabai -m display --focus last
+
+motion, misc < shift - n : yabai -m space --focus next || yabai -m space --focus first
+motion, misc < shift - p : yabai -m space --focus prev || yabai -m space --focus last
 
 # toggle window split type
-mode < cmd + alt + ctrl - e : yabai -m window --toggle split
-mode < cmd + alt + ctrl - s : "${HOME}"/.config/skhd/scripts/toggle-window-bsp-stack.sh
-mode < cmd + alt + ctrl - d : (yabai -m window --focus stack.next || yabai -m window --focus stack.first); sketchybar --trigger window_focus
-mode < cmd + alt + ctrl - 0x18 : yabai -m space --balance # =
-mode < cmd + alt + ctrl - f : yabai -m window --toggle zoom-fullscreen
-mode < cmd + alt + ctrl - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
+motion, misc < cmd + alt + ctrl - e : yabai -m window --toggle split
+motion, misc < cmd + alt + ctrl - s : "${HOME}"/.config/skhd/scripts/toggle-window-bsp-stack.sh
+motion, misc < cmd + alt + ctrl - d : (yabai -m window --focus stack.next || yabai -m window --focus stack.first); sketchybar --trigger window_focus
+motion, misc < cmd + alt + ctrl - c : yabai -m space --balance
+motion, misc < cmd + alt + ctrl - f : yabai -m window --toggle zoom-fullscreen
 
-mode < cmd - n         : "${HOME}"/.config/skhd/scripts/create_new_space.sh
-mode < shift + cmd - n : "${HOME}"/.config/skhd/scripts/create_new_space.sh 1
-mode < cmd - w         : "${HOME}"/.config/skhd/scripts/destroy_space.sh; sketchybar --update
-mode < shift + cmd - w : "${HOME}"/.config/skhd/scripts/destroy_empty_space.sh; sketchybar --update
+misc < cmd + alt + ctrl - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
 
-mode < cmd - tab       : yabai -m space --focus recent
+misc < cmd          - n : "${HOME}"/.config/skhd/scripts/create_new_space.sh
+misc < shift + cmd  - n : "${HOME}"/.config/skhd/scripts/create_new_space.sh 1
+misc < cmd          - w : "${HOME}"/.config/skhd/scripts/destroy_space.sh; sketchybar --update
+misc < shift + cmd  - w : "${HOME}"/.config/skhd/scripts/destroy_empty_space.sh; sketchybar --update
 
-# select mode
-mode < h  : yabai -m window --focus west || yabai -m display --focus prev
-mode < j  : yabai -m window --focus south
-mode < k  : yabai -m window --focus north
-mode < l  : yabai -m window --focus east || yabai -m display --focus next
+# misc mode
+misc < left  : yabai -m window --warp west || (yabai -m window --display prev; yabai -m display --focus prev)
+misc < down  : yabai -m window --warp south
+misc < up    : yabai -m window --warp north
+misc < right : yabai -m window --warp east || (yabai -m window --display next; yabai -m display --focus next)
 
-mode < n  : yabai -m display --focus next || yabai -m display --focus first
-mode < p  : yabai -m display --focus prev || yabai -m display --focus last
+misc < ctrl - right : (yabai -m window --space next; yabai -m space --focus next) || (yabai -m window --space first; yabai -m space --focus first)
+misc < ctrl - left  : (yabai -m window --space prev; yabai -m space --focus prev) || (yabai -m window --space last; yabai -m space --focus last)
 
-mode < shift - n  : yabai -m space --focus next || yabai -m space --focus first
-mode < shift - p  : yabai -m space --focus prev || yabai -m space --focus last
-
-# move mode
-mode < ctrl - h : yabai -m window --warp west || (yabai -m window --display prev; yabai -m display --focus prev)
-mode < ctrl - j : yabai -m window --warp south
-mode < ctrl - k : yabai -m window --warp north
-mode < ctrl - l : yabai -m window --warp east || (yabai -m window --display next; yabai -m display --focus next)
-
-mode < ctrl - n : (yabai -m window --space next; yabai -m space --focus next) || (yabai -m window --space first; yabai -m space --focus first)
-mode < ctrl - p : (yabai -m window --space prev; yabai -m space --focus prev) || (yabai -m window --space last; yabai -m space --focus last)
-
-mode < ctrl + shift - h  : yabai -m window --swap west
-mode < ctrl + shift - j  : yabai -m window --swap south
-mode < ctrl + shift - k  : yabai -m window --swap north
-mode < ctrl + shift - l  : yabai -m window --swap east
+misc < shift - left  : yabai -m window --swap west
+misc < shift - down  : yabai -m window --swap south
+misc < shift - up    : yabai -m window --swap north
+misc < shift - right : yabai -m window --swap east
 
 # resize mode
-mode < alt - h : yabai -m window --resize left:-50:0  || yabai -m window --resize right:-50:0
-mode < alt - j : yabai -m window --resize bottom:0:50 || yabai -m window --resize top:0:50
-mode < alt - k : yabai -m window --resize top:0:-50   || yabai -m window --resize bottom:0:-50
-mode < alt - l : yabai -m window --resize right:50:0  || yabai -m window --resize left:50:0
+misc < alt - h : yabai -m window --resize left:-50:0  || yabai -m window --resize right:-50:0
+misc < alt - j : yabai -m window --resize bottom:0:50 || yabai -m window --resize top:0:50
+misc < alt - k : yabai -m window --resize top:0:-50   || yabai -m window --resize bottom:0:-50
+misc < alt - l : yabai -m window --resize right:50:0  || yabai -m window --resize left:50:0
 
-mode < shift + alt - h : yabai -m window --resize left:50:0
-mode < shift + alt - j : yabai -m window --resize bottom:0:-50
-mode < shift + alt - k : yabai -m window --resize top:0:50
-mode < shift + alt - l : yabai -m window --resize right:-50:0
+misc < shift + alt - h : yabai -m window --resize left:50:0
+misc < shift + alt - j : yabai -m window --resize bottom:0:-50
+misc < shift + alt - k : yabai -m window --resize top:0:50
+misc < shift + alt - l : yabai -m window --resize right:-50:0
 
 # Float mode
-hyper - l ; float
-float < cmd + alt + ctrl - l ; mode
-float < escape ; default
-
 float < space        : "${HOME}"/.config/skhd/scripts/toggle-window-floating-tiling.sh
 
-float < cmd + alt + ctrl - 0x18 : yabai -m window --grid 4:4:1:1:2:2 # =
+float < cmd + alt + ctrl - c : yabai -m window --grid 4:4:1:1:2:2
 
 # make floating window fill screen
 float < cmd + alt + ctrl - f : yabai -m window --grid 1:1:0:0:1:1
