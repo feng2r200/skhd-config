@@ -11,18 +11,18 @@
 cmd + alt + ctrl - a : /Applications/Alacritty.app/Contents/MacOS/alacritty
 
 # Mod Change
-cmd + alt + ctrl - l                    ; motion
-cmd + alt + ctrl - 0x29                 ; misc # ;
-cmd + alt + ctrl - 0x27                 ; float # '
+cmd + alt + ctrl - k                    ; motion
+cmd + alt + ctrl - l                 ; misc # ;
+cmd + alt + ctrl - 0x29                 ; float # '
 
 motion, misc, float < escape            ; default
-motion  < cmd + alt + ctrl - l          ; default
-misc    < cmd + alt + ctrl - 0x29       ; default
-float   < cmd + alt + ctrl - 0x27       ; default
+motion  < cmd + alt + ctrl - k          ; default
+misc    < cmd + alt + ctrl - l       ; default
+float   < cmd + alt + ctrl - 0x29       ; default
 
-misc, float   < cmd + alt + ctrl - l    ; motion
-motion, float < cmd + alt + ctrl - 0x29 ; misc
-motion, misc  < cmd + alt + ctrl - 0x27 ; float
+misc, float   < cmd + alt + ctrl - k    ; motion
+motion, float < cmd + alt + ctrl - l ; misc
+motion, misc  < cmd + alt + ctrl - 0x29 ; float
 
 # Focus Change
 motion, misc < cmd - tab : yabai -m space --focus recent
