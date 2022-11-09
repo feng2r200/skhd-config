@@ -9,31 +9,17 @@
 
 # Mod Change
 cmd + alt + ctrl - k                    ; motion
-cmd + alt + ctrl - l                 ; misc # ;
-cmd + alt + ctrl - 0x29                 ; float # '
+cmd + alt + ctrl - l                    ; misc
+cmd + alt + ctrl - 0x29                 ; float
 
 motion, misc, float < escape            ; default
 motion  < cmd + alt + ctrl - k          ; default
-misc    < cmd + alt + ctrl - l       ; default
+misc    < cmd + alt + ctrl - l          ; default
 float   < cmd + alt + ctrl - 0x29       ; default
 
 misc, float   < cmd + alt + ctrl - k    ; motion
-motion, float < cmd + alt + ctrl - l ; misc
+motion, float < cmd + alt + ctrl - l    ; misc
 motion, misc  < cmd + alt + ctrl - 0x29 ; float
-
-# Focus Change
-motion, misc < cmd - tab : yabai -m space --focus recent
-
-motion, misc < ctrl - h  : yabai -m window --focus west || yabai -m display --focus prev
-motion, misc < ctrl - j  : yabai -m window --focus south
-motion, misc < ctrl - k  : yabai -m window --focus north
-motion, misc < ctrl - l  : yabai -m window --focus east || yabai -m display --focus next
-
-motion, misc < ctrl - n  : yabai -m display --focus next || yabai -m display --focus first
-motion, misc < ctrl - p  : yabai -m display --focus prev || yabai -m display --focus last
-
-motion, misc < shift - n : yabai -m space --focus next || yabai -m space --focus first
-motion, misc < shift - p : yabai -m space --focus prev || yabai -m space --focus last
 
 # toggle window split type
 motion, misc < cmd + alt + ctrl - e : yabai -m window --toggle split
@@ -49,19 +35,35 @@ misc < shift + cmd  - n : "${HOME}"/.config/skhd/scripts/create_new_space.sh 1
 misc < cmd          - w : "${HOME}"/.config/skhd/scripts/destroy_space.sh; sketchybar --update
 misc < shift + cmd  - w : "${HOME}"/.config/skhd/scripts/destroy_empty_space.sh; sketchybar --update
 
-# misc mode
-misc < left  : yabai -m window --warp west || (yabai -m window --display prev; yabai -m display --focus prev)
-misc < down  : yabai -m window --warp south
-misc < up    : yabai -m window --warp north
-misc < right : yabai -m window --warp east || (yabai -m window --display next; yabai -m display --focus next)
+# Focus Change
+motion < cmd - tab : yabai -m space --focus recent
 
-misc < ctrl - right : (yabai -m window --space next; yabai -m space --focus next) || (yabai -m window --space first; yabai -m space --focus first)
-misc < ctrl - left  : (yabai -m window --space prev; yabai -m space --focus prev) || (yabai -m window --space last; yabai -m space --focus last)
+motion < ctrl - h  : yabai -m window --focus west || yabai -m display --focus prev
+motion < ctrl - j  : yabai -m window --focus south
+motion < ctrl - k  : yabai -m window --focus north
+motion < ctrl - l  : yabai -m window --focus east || yabai -m display --focus next
 
-misc < shift - left  : yabai -m window --swap west
-misc < shift - down  : yabai -m window --swap south
-misc < shift - up    : yabai -m window --swap north
-misc < shift - right : yabai -m window --swap east
+motion < ctrl - n  : yabai -m display --focus next || yabai -m display --focus first
+motion < ctrl - p  : yabai -m display --focus prev || yabai -m display --focus last
+
+motion < shift - n : yabai -m space --focus next || yabai -m space --focus first
+motion < shift - p : yabai -m space --focus prev || yabai -m space --focus last
+
+# Warp Mode
+misc < cmd - tab : yabai -m window --focus recent
+
+misc < ctrl - h  : yabai -m window --warp west || (yabai -m window --display prev; yabai -m display --focus prev)
+misc < ctrl - j  : yabai -m window --warp south
+misc < ctrl - k  : yabai -m window --warp north
+misc < ctrl - l  : yabai -m window --warp east || (yabai -m window --display next; yabai -m display --focus next)
+
+misc < shift - n : (yabai -m window --space next; yabai -m space --focus next) || (yabai -m window --space first; yabai -m space --focus first)
+misc < shift - p : (yabai -m window --space prev; yabai -m space --focus prev) || (yabai -m window --space last; yabai -m space --focus last)
+
+misc < shift - h : yabai -m window --swap west
+misc < shift - j : yabai -m window --swap south
+misc < shift - k : yabai -m window --swap north
+misc < shift - l : yabai -m window --swap east
 
 # resize mode
 misc < alt - h : yabai -m window --resize left:-50:0  || yabai -m window --resize right:-50:0
