@@ -7,6 +7,9 @@
 :: misc @   : sketchybar --trigger skhd_mod VAR='MISC'
 :: float @  : sketchybar --trigger skhd_mod VAR='FLOAT'
 
+# Open
+cmd + alt + ctrl - a : /Applications/Alacritty.app/Contents/MacOS/alacritty
+
 # Mod Change
 cmd + alt + ctrl - k                    ; motion
 cmd + alt + ctrl - l                    ; misc
