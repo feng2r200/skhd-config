@@ -9,6 +9,7 @@
 
 # Open
 cmd + alt + ctrl - a : /Applications/Alacritty.app/Contents/MacOS/alacritty
+cmd + alt + shift + ctrl -a : "${HOME}"/.config/skhd/scripts/open_iterm2.sh
 
 # Mod Change
 cmd + alt + ctrl - k                    ; motion
