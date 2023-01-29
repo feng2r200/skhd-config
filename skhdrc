@@ -42,10 +42,10 @@ misc < shift + cmd  - w : "${HOME}"/.config/skhd/scripts/destroy_empty_space.sh;
 # Focus Change
 motion < cmd - tab : yabai -m space --focus recent
 
-motion < ctrl - h  : yabai -m window --focus west || yabai -m display --focus prev || yabai -m space --focus prev
+motion < ctrl - h  : yabai -m window --focus west || yabai -m display --focus prev || yabai -m space --focus prev || yabai -m display --focus last || yabai -m space --focus last
 motion < ctrl - j  : yabai -m window --focus south
 motion < ctrl - k  : yabai -m window --focus north
-motion < ctrl - l  : yabai -m window --focus east || yabai -m display --focus next || yabai -m space --focus next
+motion < ctrl - l  : yabai -m window --focus east || yabai -m display --focus next || yabai -m space --focus next || yabai -m display --focus first || yabai -m space --focus first
 
 motion < ctrl - n  : yabai -m display --focus next || yabai -m display --focus first
 motion < ctrl - p  : yabai -m display --focus prev || yabai -m display --focus last
@@ -56,10 +56,10 @@ motion < shift - p : yabai -m space --focus prev || yabai -m space --focus last
 # Warp Mode
 misc < cmd - tab : yabai -m window --focus recent
 
-misc < ctrl - h  : yabai -m window --warp west || (yabai -m window --display prev; yabai -m display --focus prev)
+misc < ctrl - h  : yabai -m window --warp west || (yabai -m window --display prev; yabai -m display --focus prev) || (yabai -m window --display last; yabai -m display --focus last)
 misc < ctrl - j  : yabai -m window --warp south
 misc < ctrl - k  : yabai -m window --warp north
-misc < ctrl - l  : yabai -m window --warp east || (yabai -m window --display next; yabai -m display --focus next)
+misc < ctrl - l  : yabai -m window --warp east || (yabai -m window --display next; yabai -m display --focus next) || (yabai -m window --display first; yabai -m display --focus first)
 
 misc < shift - n : (yabai -m window --space next; yabai -m space --focus next) || (yabai -m window --space first; yabai -m space --focus first)
 misc < shift - p : (yabai -m window --space prev; yabai -m space --focus prev) || (yabai -m window --space last; yabai -m space --focus last)
