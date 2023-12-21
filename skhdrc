@@ -8,31 +8,31 @@
 :: float @  : sketchybar --trigger skhd_mod VAR='FLOAT'
 
 # Open
-cmd + alt + ctrl - a : /Applications/Alacritty.app/Contents/MacOS/alacritty
-cmd + alt + shift + ctrl -a : "${HOME}"/.config/skhd/scripts/open_iterm2.sh
+# cmd + alt + ctrl - a : /Applications/Alacritty.app/Contents/MacOS/alacritty
+# cmd + alt + shift + ctrl -a : "${HOME}"/.config/skhd/scripts/open_iterm2.sh
 
 # Mod Change
-cmd + alt + ctrl - k                    ; motion
-cmd + alt + ctrl - l                    ; misc
-cmd + alt + ctrl - 0x29                 ; float
+cmd + alt + shift - k                    ; motion
+cmd + alt + shift - l                    ; misc
+cmd + alt + shift - 0x29                 ; float
 
 motion, misc, float < escape            ; default
-motion  < cmd + alt + ctrl - k          ; default
-misc    < cmd + alt + ctrl - l          ; default
-float   < cmd + alt + ctrl - 0x29       ; default
+motion  < cmd + alt + shift - k          ; default
+misc    < cmd + alt + shift - l          ; default
+float   < cmd + alt + shift - 0x29       ; default
 
-misc, float   < cmd + alt + ctrl - k    ; motion
-motion, float < cmd + alt + ctrl - l    ; misc
-motion, misc  < cmd + alt + ctrl - 0x29 ; float
+misc, float   < cmd + alt + shift - k    ; motion
+motion, float < cmd + alt + shift - l    ; misc
+motion, misc  < cmd + alt + shift - 0x29 ; float
 
 # toggle window split type
-motion, misc < cmd + alt + ctrl - e : yabai -m window --toggle split
-motion, misc < cmd + alt + ctrl - s : "${HOME}"/.config/skhd/scripts/toggle-window-bsp-stack.sh
-motion, misc < cmd + alt + ctrl - d : (yabai -m window --focus stack.next || yabai -m window --focus stack.first); sketchybar --trigger window_focus
-motion, misc < cmd + alt + ctrl - c : yabai -m space --balance
-motion, misc < cmd + alt + ctrl - f : yabai -m window --toggle zoom-fullscreen
+motion, misc < cmd + alt + shift - e : yabai -m window --toggle split
+motion, misc < cmd + alt + shift - s : "${HOME}"/.config/skhd/scripts/toggle-window-bsp-stack.sh
+motion, misc < cmd + alt + shift - d : (yabai -m window --focus stack.next || yabai -m window --focus stack.first); sketchybar --trigger window_focus
+motion, misc < cmd + alt + shift - c : yabai -m space --balance
+motion, misc < cmd + alt + shift - f : yabai -m window --toggle zoom-fullscreen
 
-misc < cmd + alt + ctrl - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
+misc < cmd + alt + shift - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
 
 misc < cmd          - n : "${HOME}"/.config/skhd/scripts/create_new_space.sh
 misc < shift + cmd  - n : "${HOME}"/.config/skhd/scripts/create_new_space.sh 1
@@ -83,10 +83,10 @@ misc < shift + alt - l : yabai -m window --resize right:-50:0
 # Float mode
 float < space        : "${HOME}"/.config/skhd/scripts/toggle-window-floating-tiling.sh
 
-float < cmd + alt + ctrl - c : yabai -m window --grid 4:4:1:1:2:2
+float < cmd + alt + shift - c : yabai -m window --grid 4:4:1:1:2:2
 
 # make floating window fill screen
-float < cmd + alt + ctrl - f : yabai -m window --grid 1:1:0:0:1:1
+float < cmd + alt + shift - f : yabai -m window --grid 1:1:0:0:1:1
 
 # move floating window
 float < y : yabai -m window --grid 1:2:0:0:1:1
