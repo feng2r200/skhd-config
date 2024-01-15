@@ -27,6 +27,7 @@ motion, misc < cmd + alt + shift - s : "${HOME}"/.config/skhd/scripts/toggle-win
 motion, misc < cmd + alt + shift - d : (yabai -m window --focus stack.next || yabai -m window --focus stack.first); sketchybar --trigger window_focus
 motion, misc < cmd + alt + shift - c : yabai -m space --balance
 motion, misc < cmd + alt + shift - f : yabai -m window --toggle zoom-fullscreen
+motion, misc < cmd + alt + shift - b : "${HOME}"/.config/skhd/scripts/toggle-layout.sh
 
 misc < cmd + alt + shift - r : yabai --restart-service
 
