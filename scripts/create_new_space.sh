@@ -1,11 +1,11 @@
-#!/usr/bin/env bash
+#!/bin/zsh
 
 ## 创建一个新的space
 ## arg[0] == 1, 将当前窗口移动至新的space
 
 # set -x
 
-if [ $1="1" ]; then
+if [ $1 = "1" ]; then
   moveCurrentWindow="yes"
 fi
 
