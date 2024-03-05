@@ -3,33 +3,34 @@
 # ############################################################### #
 
 :: default  : sketchybar --trigger skhd_mod VAR='NORMAL'
-:: motion @ : sketchybar --trigger skhd_mod VAR='MOTION'
+:: skhd @ : sketchybar --trigger skhd_mod VAR='SKHD'
 :: misc @   : sketchybar --trigger skhd_mod VAR='MISC'
 :: float @  : sketchybar --trigger skhd_mod VAR='FLOAT'
 
 # Mod Change
-cmd + alt + shift - k                    ; motion
+cmd + ctrl + alt + shift - k                ; skhd
+misc, float < cmd + ctrl + alt + shift - k  ; skhd
+skhd, misc, float < escape                  ; default
+
 cmd + alt + shift - l                    ; misc
 cmd + alt + shift - 0x29                 ; float
 
-motion, misc, float < escape            ; default
-motion  < cmd + alt + shift - k          ; default
+skhd  < cmd + alt + shift - k            ; default
 misc    < cmd + alt + shift - l          ; default
 float   < cmd + alt + shift - 0x29       ; default
 
-misc, float   < cmd + alt + shift - k    ; motion
-motion, float < cmd + alt + shift - l    ; misc
-motion, misc  < cmd + alt + shift - 0x29 ; float
+skhd, float < cmd + alt + shift - l    ; misc
+skhd, misc  < cmd + alt + shift - 0x29 ; float
 
 # toggle window split type
-motion, misc < cmd + alt + shift - e : yabai -m window --toggle split
-motion, misc < cmd + alt + shift - s : "${HOME}"/.config/skhd/scripts/toggle-window-bsp-stack.sh
-motion, misc < cmd + alt + shift - d : (yabai -m window --focus stack.next || yabai -m window --focus stack.first); sketchybar --trigger window_focus
-motion, misc < cmd + alt + shift - c : yabai -m space --balance
-motion, misc < cmd + alt + shift - f : yabai -m window --toggle zoom-fullscreen
-motion, misc < cmd + alt + shift - b : "${HOME}"/.config/skhd/scripts/toggle-layout.sh
+skhd, misc < cmd + alt + shift - e : yabai -m window --toggle split
+skhd, misc < cmd + alt + shift - s : "${HOME}"/.config/skhd/scripts/toggle-window-bsp-stack.sh
+skhd, misc < cmd + alt + shift - d : (yabai -m window --focus stack.next || yabai -m window --focus stack.first); sketchybar --trigger window_focus
+skhd, misc < cmd + alt + shift - c : yabai -m space --balance
+skhd, misc < cmd + alt + shift - f : yabai -m window --toggle zoom-fullscreen
+skhd, misc < cmd + alt + shift - b : "${HOME}"/.config/skhd/scripts/toggle-layout.sh
 
-misc < cmd + alt + shift - r : yabai --restart-service
+# misc < cmd + alt + shift - r : yabai --restart-service
 
 misc < cmd          - n : "${HOME}"/.config/skhd/scripts/create_new_space.sh
 misc < shift + cmd  - n : "${HOME}"/.config/skhd/scripts/create_new_space.sh 1
@@ -37,18 +38,18 @@ misc < cmd          - w : "${HOME}"/.config/skhd/scripts/destroy_space.sh; sketc
 misc < shift + cmd  - w : "${HOME}"/.config/skhd/scripts/destroy_empty_space.sh; sketchybar --update
 
 # Focus Change
-motion < cmd - tab : yabai -m space --focus recent
+skhd < cmd - tab : yabai -m window --focus recent
 
-motion < ctrl - h  : yabai -m window --focus west || yabai -m display --focus prev || yabai -m space --focus prev || yabai -m display --focus last || yabai -m space --focus last
-motion < ctrl - j  : yabai -m window --focus south
-motion < ctrl - k  : yabai -m window --focus north
-motion < ctrl - l  : yabai -m window --focus east || yabai -m display --focus next || yabai -m space --focus next || yabai -m display --focus first || yabai -m space --focus first
+skhd < ctrl - h  : "${HOME}"/.config/skhd/scripts/focus_window.sh west
+skhd < ctrl - j  : "${HOME}"/.config/skhd/scripts/focus_window.sh south
+skhd < ctrl - k  : "${HOME}"/.config/skhd/scripts/focus_window.sh north
+skhd < ctrl - l  : "${HOME}"/.config/skhd/scripts/focus_window.sh east
 
-motion < ctrl - n  : yabai -m display --focus next || yabai -m display --focus first
-motion < ctrl - p  : yabai -m display --focus prev || yabai -m display --focus last
+skhd < ctrl - n  : yabai -m display --focus next || yabai -m display --focus first
+skhd < ctrl - p  : yabai -m display --focus prev || yabai -m display --focus last
 
-motion < shift - n : yabai -m space --focus next || yabai -m space --focus first
-motion < shift - p : yabai -m space --focus prev || yabai -m space --focus last
+skhd < shift - n : yabai -m space --focus next || yabai -m space --focus first
+skhd < shift - p : yabai -m space --focus prev || yabai -m space --focus last
 
 # Warp Mode
 misc < cmd - tab : yabai -m window --focus recent
