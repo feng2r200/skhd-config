@@ -9,11 +9,12 @@
 
 # Mod Change
 cmd + ctrl + alt + shift - k                ; skhd
+misc, float < backspace  ; skhd
 misc, float < cmd + ctrl + alt + shift - k  ; skhd
 skhd, misc, float < escape                  ; default
 
-cmd + alt + shift - l                    ; misc
-cmd + alt + shift - 0x29                 ; float
+skhd < alt - l                    ; misc
+skhd < alt - 0x29                 ; float
 
 skhd  < cmd + alt + shift - k            ; default
 misc    < cmd + alt + shift - l          ; default
@@ -23,45 +24,39 @@ skhd, float < cmd + alt + shift - l    ; misc
 skhd, misc  < cmd + alt + shift - 0x29 ; float
 
 # toggle window split type
-skhd, misc < cmd + alt + shift - e : yabai -m window --toggle split
-skhd, misc < cmd + alt + shift - s : "${HOME}"/.config/skhd/scripts/toggle-window-bsp-stack.sh
-skhd, misc < cmd + alt + shift - d : (yabai -m window --focus stack.next || yabai -m window --focus stack.first); sketchybar --trigger window_focus
-skhd, misc < cmd + alt + shift - c : yabai -m space --balance
-skhd, misc < cmd + alt + shift - f : yabai -m window --toggle zoom-fullscreen
-skhd, misc < cmd + alt + shift - b : "${HOME}"/.config/skhd/scripts/toggle-layout.sh
+skhd < cmd + alt + shift - e : yabai -m window --toggle split
+skhd < cmd + alt + shift - s : "${HOME}"/.config/skhd/scripts/toggle-window-bsp-stack.sh
+skhd < cmd + alt + shift - d : (yabai -m window --focus stack.next || yabai -m window --focus stack.first); sketchybar --trigger window_focus
+skhd < cmd + alt + shift - c : yabai -m space --balance
+skhd < cmd + alt + shift - f : yabai -m window --toggle zoom-fullscreen
+skhd < cmd + alt + shift - b : "${HOME}"/.config/skhd/scripts/toggle-layout.sh
 
-# misc < cmd + alt + shift - r : yabai --restart-service
-
-misc < cmd          - n : "${HOME}"/.config/skhd/scripts/create_new_space.sh
-misc < shift + cmd  - n : "${HOME}"/.config/skhd/scripts/create_new_space.sh 1
-misc < cmd          - w : "${HOME}"/.config/skhd/scripts/destroy_space.sh; sketchybar --update
-misc < shift + cmd  - w : "${HOME}"/.config/skhd/scripts/destroy_empty_space.sh; sketchybar --update
+# space control
+skhd < cmd          - n : "${HOME}"/.config/skhd/scripts/create_new_space.sh
+skhd < shift + cmd  - n : "${HOME}"/.config/skhd/scripts/create_new_space.sh 1
+skhd < cmd          - w : "${HOME}"/.config/skhd/scripts/destroy_space.sh; sketchybar --update
+skhd < shift + cmd  - w : "${HOME}"/.config/skhd/scripts/destroy_empty_space.sh; sketchybar --update
 
 # Focus Change
-skhd < cmd - tab : yabai -m window --focus recent
-
 skhd < ctrl - h  : "${HOME}"/.config/skhd/scripts/focus_window.sh west
 skhd < ctrl - j  : "${HOME}"/.config/skhd/scripts/focus_window.sh south
 skhd < ctrl - k  : "${HOME}"/.config/skhd/scripts/focus_window.sh north
 skhd < ctrl - l  : "${HOME}"/.config/skhd/scripts/focus_window.sh east
 
-skhd < ctrl - n  : yabai -m display --focus next || yabai -m display --focus first
-skhd < ctrl - p  : yabai -m display --focus prev || yabai -m display --focus last
+skhd < cmd - tab  : yabai -m window --focus recent
 
-skhd < shift - n : yabai -m space --focus next || yabai -m space --focus first
-skhd < shift - p : yabai -m space --focus prev || yabai -m space --focus last
+# focus_space
+skhd < alt - right : "${HOME}"/.config/skhd/scripts/focus_space.sh next
+skhd < alt - left : "${HOME}"/.config/skhd/scripts/focus_space.sh prev
 
 # Warp Mode
-misc < cmd - tab : yabai -m window --focus recent
+misc < ctrl - left  : yabai -m window --warp west || (yabai -m window --display prev; yabai -m display --focus prev)
+misc < ctrl - right  : yabai -m window --warp east || (yabai -m window --display next; yabai -m display --focus next)
+misc < ctrl - down  : yabai -m window --warp south
+misc < ctrl - up  : yabai -m window --warp north
 
-misc < ctrl - h  : yabai -m window --warp west || (yabai -m window --display prev; yabai -m display --focus prev)
-misc < ctrl - l  : yabai -m window --warp east || (yabai -m window --display next; yabai -m display --focus next)
-
-misc < ctrl - j  : yabai -m window --warp south
-misc < ctrl - k  : yabai -m window --warp north
-
-misc < shift - n : (yabai -m window --space next; yabai -m space --focus next)
-misc < shift - p : (yabai -m window --space prev; yabai -m space --focus prev)
+misc < ctrl + alt - right : (yabai -m window --space next; yabai -m space --focus next)
+misc < ctrl + alt - left : (yabai -m window --space prev; yabai -m space --focus prev)
 
 misc < shift - h : yabai -m window --swap west
 misc < shift - j : yabai -m window --swap south
