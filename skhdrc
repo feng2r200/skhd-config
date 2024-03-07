@@ -23,6 +23,7 @@ float < cmd + alt + shift - 0x29            ; default
 skhd, float < cmd + alt + shift - l         ; misc
 skhd, misc  < cmd + alt + shift - 0x29      ; float
 
+## Config {
 # toggle window split type
 skhd < cmd + alt + shift - e : yabai -m window --toggle split
 skhd < cmd + alt + shift - s : "${HOME}"/.config/skhd/scripts/toggle-window-bsp-stack.sh
@@ -36,7 +37,9 @@ skhd < cmd          - n : "${HOME}"/.config/skhd/scripts/create_new_space.sh
 skhd < shift + cmd  - n : "${HOME}"/.config/skhd/scripts/create_new_space.sh 1
 skhd < cmd          - w : "${HOME}"/.config/skhd/scripts/destroy_space.sh; sketchybar --update
 skhd < shift + cmd  - w : "${HOME}"/.config/skhd/scripts/destroy_empty_space.sh; sketchybar --update
+## }
 
+## Focus {
 # Focus Change
 skhd < ctrl - h         : "${HOME}"/.config/skhd/scripts/focus_window.sh west
 skhd < ctrl - j         : "${HOME}"/.config/skhd/scripts/focus_window.sh south
@@ -46,22 +49,23 @@ skhd < ctrl - l         : "${HOME}"/.config/skhd/scripts/focus_window.sh east
 skhd < cmd - tab        : yabai -m window --focus recent
 
 # focus_space
-skhd < alt - right      : "${HOME}"/.config/skhd/scripts/focus_space.sh next
-skhd < alt - left       : "${HOME}"/.config/skhd/scripts/focus_space.sh prev
+skhd < ctrl - right     : "${HOME}"/.config/skhd/scripts/focus_space.sh next
+skhd < ctrl - left      : "${HOME}"/.config/skhd/scripts/focus_space.sh prev
+## }
 
 # Warp Mode
-misc < ctrl - left      : yabai -m window --warp west || (yabai -m window --display prev; yabai -m display --focus prev)
-misc < ctrl - right     : yabai -m window --warp east || (yabai -m window --display next; yabai -m display --focus next)
-misc < ctrl - down      : yabai -m window --warp south
-misc < ctrl - up        : yabai -m window --warp north
+misc < ctrl - h         : "${HOME}"/.config/skhd/scripts/warp_window.sh west
+misc < ctrl - j         : "${HOME}"/.config/skhd/scripts/warp_window.sh south
+misc < ctrl - k         : "${HOME}"/.config/skhd/scripts/warp_window.sh north
+misc < ctrl - l         : "${HOME}"/.config/skhd/scripts/warp_window.sh east
 
-misc < ctrl + alt - right : (yabai -m window --space next; yabai -m space --focus next)
-misc < ctrl + alt - left  : (yabai -m window --space prev; yabai -m space --focus prev)
+misc < ctrl - right     : yabai -m window --space next && yabai -m space --focus next
+misc < ctrl - left      : yabai -m window --space prev && yabai -m space --focus prev
 
-misc < shift - h          : yabai -m window --swap west
-misc < shift - j          : yabai -m window --swap south
-misc < shift - k          : yabai -m window --swap north
-misc < shift - l          : yabai -m window --swap east
+misc < shift - h        : yabai -m window --swap west
+misc < shift - j        : yabai -m window --swap south
+misc < shift - k        : yabai -m window --swap north
+misc < shift - l        : yabai -m window --swap east
 
 # resize mode
 misc < alt - h : yabai -m window --resize left:-50:0  || yabai -m window --resize right:-50:0
