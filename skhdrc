@@ -4,24 +4,24 @@
 
 :: default  : sketchybar --trigger skhd_mod VAR='NORMAL'
 :: skhd @   : sketchybar --trigger skhd_mod VAR='SKHD'
-:: misc @   : sketchybar --trigger skhd_mod VAR='MISC'
-:: float @  : sketchybar --trigger skhd_mod VAR='FLOAT'
+:: mod1 @   : sketchybar --trigger skhd_mod VAR='MOD1'
+:: mod2 @  : sketchybar --trigger skhd_mod VAR='MOD2'
 
 # Mod Change
 cmd + ctrl + alt + shift - k                ; skhd
-misc, float < backspace                     ; skhd
-misc, float < cmd + ctrl + alt + shift - k  ; skhd
-skhd, misc, float < escape                  ; default
+mod1, mod2 < backspace                     ; skhd
+mod1, mod2 < cmd + ctrl + alt + shift - k  ; skhd
+skhd, mod1, mod2 < escape                  ; default
 
-skhd < cmd + ctrl + alt + shift - l         ; misc
-skhd < cmd + ctrl + alt + shift - 0x29      ; float
+skhd < cmd + ctrl + alt + shift - l         ; mod1
+skhd < cmd + ctrl + alt + shift - 0x29      ; mod2
 
 skhd  < cmd + alt + shift - k               ; default
-misc  < cmd + alt + shift - l               ; default
-float < cmd + alt + shift - 0x29            ; default
+mod1  < cmd + alt + shift - l               ; default
+mod2 < cmd + alt + shift - 0x29            ; default
 
-skhd, float < cmd + alt + shift - l         ; misc
-skhd, misc  < cmd + alt + shift - 0x29      ; float
+skhd, mod2 < cmd + alt + shift - l         ; mod1
+skhd, mod1  < cmd + alt + shift - 0x29      ; mod2
 
 ## Config {
 # toggle window split type
@@ -53,63 +53,64 @@ skhd < ctrl - right     : "${HOME}"/.config/skhd/scripts/focus_space.sh next
 skhd < ctrl - left      : "${HOME}"/.config/skhd/scripts/focus_space.sh prev
 ## }
 
-# Warp Mode
-misc < ctrl - h         : "${HOME}"/.config/skhd/scripts/warp_window.sh west
-misc < ctrl - j         : "${HOME}"/.config/skhd/scripts/warp_window.sh south
-misc < ctrl - k         : "${HOME}"/.config/skhd/scripts/warp_window.sh north
-misc < ctrl - l         : "${HOME}"/.config/skhd/scripts/warp_window.sh east
+## Warp Mode {
+mod1 < ctrl - h         : "${HOME}"/.config/skhd/scripts/warp_window.sh west
+mod1 < ctrl - j         : "${HOME}"/.config/skhd/scripts/warp_window.sh south
+mod1 < ctrl - k         : "${HOME}"/.config/skhd/scripts/warp_window.sh north
+mod1 < ctrl - l         : "${HOME}"/.config/skhd/scripts/warp_window.sh east
 
-misc < ctrl - right     : yabai -m window --space next && yabai -m space --focus next
-misc < ctrl - left      : yabai -m window --space prev && yabai -m space --focus prev
+mod1 < ctrl - right     : yabai -m window --space next && yabai -m space --focus next
+mod1 < ctrl - left      : yabai -m window --space prev && yabai -m space --focus prev
 
-misc < shift - h        : yabai -m window --swap west
-misc < shift - j        : yabai -m window --swap south
-misc < shift - k        : yabai -m window --swap north
-misc < shift - l        : yabai -m window --swap east
+mod1 < shift - h        : yabai -m window --swap west
+mod1 < shift - j        : yabai -m window --swap south
+mod1 < shift - k        : yabai -m window --swap north
+mod1 < shift - l        : yabai -m window --swap east
+## }
 
 # resize mode
-misc < alt - h : yabai -m window --resize left:-50:0  || yabai -m window --resize right:-50:0
-misc < alt - j : yabai -m window --resize bottom:0:50 || yabai -m window --resize top:0:50
-misc < alt - k : yabai -m window --resize top:0:-50   || yabai -m window --resize bottom:0:-50
-misc < alt - l : yabai -m window --resize right:50:0  || yabai -m window --resize left:50:0
+mod1 < alt - h : yabai -m window --resize left:-50:0  || yabai -m window --resize right:-50:0
+mod1 < alt - j : yabai -m window --resize bottom:0:50 || yabai -m window --resize top:0:50
+mod1 < alt - k : yabai -m window --resize top:0:-50   || yabai -m window --resize bottom:0:-50
+mod1 < alt - l : yabai -m window --resize right:50:0  || yabai -m window --resize left:50:0
 
-misc < shift + alt - h : yabai -m window --resize left:50:0
-misc < shift + alt - j : yabai -m window --resize bottom:0:-50
-misc < shift + alt - k : yabai -m window --resize top:0:50
-misc < shift + alt - l : yabai -m window --resize right:-50:0
+mod1 < shift + alt - h : yabai -m window --resize left:50:0
+mod1 < shift + alt - j : yabai -m window --resize bottom:0:-50
+mod1 < shift + alt - k : yabai -m window --resize top:0:50
+mod1 < shift + alt - l : yabai -m window --resize right:-50:0
 
-# Float mode
-float < space        : "${HOME}"/.config/skhd/scripts/toggle-window-floating-tiling.sh
+## mod2 mode {
+mod2 < space        : "${HOME}"/.config/skhd/scripts/toggle-window-floating-tiling.sh
 
-float < cmd + alt + shift - c : yabai -m window --grid 4:4:1:1:2:2
+mod2 < cmd + alt + shift - c : yabai -m window --grid 4:4:1:1:2:2
 
 # make floating window fill screen
-float < cmd + alt + shift - f : yabai -m window --grid 1:1:0:0:1:1
+mod2 < cmd + alt + shift - f : yabai -m window --grid 1:1:0:0:1:1
 
 # move floating window
-float < y : yabai -m window --grid 1:2:0:0:1:1
-float < u : yabai -m window --grid 2:1:0:1:1:1
-float < i : yabai -m window --grid 2:1:0:0:1:1
-float < o : yabai -m window --grid 1:2:1:0:1:1
-
-float < shift - y : yabai -m window --grid 2:2:0:0:1:1
-float < shift - u : yabai -m window --grid 2:2:0:1:1:1
-float < shift - i : yabai -m window --grid 2:2:1:0:1:1
-float < shift - o : yabai -m window --grid 2:2:1:1:1:1
+mod2 < ctrl - h : yabai -m window --move rel:-20:0
+mod2 < ctrl - j : yabai -m window --move rel:0:20
+mod2 < ctrl - k : yabai -m window --move rel:0:-20
+mod2 < ctrl - l : yabai -m window --move rel:20:0
 
 # move floating window
-float < h : yabai -m window --move rel:-20:0
-float < j : yabai -m window --move rel:0:20
-float < k : yabai -m window --move rel:0:-20
-float < l : yabai -m window --move rel:20:0
+mod2 < y : yabai -m window --grid 1:2:0:0:1:1
+mod2 < u : yabai -m window --grid 2:1:0:1:1:1
+mod2 < i : yabai -m window --grid 2:1:0:0:1:1
+mod2 < o : yabai -m window --grid 1:2:1:0:1:1
+
+mod2 < shift - y : yabai -m window --grid 2:2:0:0:1:1
+mod2 < shift - u : yabai -m window --grid 2:2:0:1:1:1
+mod2 < shift - i : yabai -m window --grid 2:2:1:0:1:1
+mod2 < shift - o : yabai -m window --grid 2:2:1:1:1:1
 
 # increase window size
-float < alt - h        : yabai -m window --resize left:-20:0
-float < alt - j        : yabai -m window --resize bottom:0:20
-float < alt - k        : yabai -m window --resize top:0:-20
-float < alt - l        : yabai -m window --resize right:20:0
-float < shift + alt - h: yabai -m window --resize left:20:0
-float < shift + alt - j: yabai -m window --resize bottom:0:-20
-float < shift + alt - k: yabai -m window --resize top:0:20
-float < shift + alt - l: yabai -m window --resize right:-20:0
-
+mod2 < alt - left        : yabai -m window --resize left:-20:0
+mod2 < alt - down        : yabai -m window --resize bottom:0:20
+mod2 < alt - up          : yabai -m window --resize top:0:-20
+mod2 < alt - right       : yabai -m window --resize right:20:0
+mod2 < shift - left      : yabai -m window --resize left:20:0
+mod2 < shift - down      : yabai -m window --resize bottom:0:-20
+mod2 < shift - up        : yabai -m window --resize top:0:20
+mod2 < shift - right     : yabai -m window --resize right:-20:0
+# }
